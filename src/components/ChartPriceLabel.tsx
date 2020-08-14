@@ -1,5 +1,5 @@
 import React from "react";
-import { PriceLabel } from '../styled-components/labels.js'
+import { PriceLabel } from '../styled-components/labels'
 
 const ChartPriceLabel = () => {
     return (

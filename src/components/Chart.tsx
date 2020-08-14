@@ -5,14 +5,12 @@ import { Area, AreaChart, CartesianGrid, Label, ReferenceLine, ResponsiveContain
 import { ChartButton } from '../styled-components/buttons';
 import { Row } from '../styled-components/wrappers';
 import { getPriceTicks, getTimeTicks } from '../util';
-import {StockState, AxisProp} from '../reducers/types'
+import {StockState} from '../reducers/types'
 
 const ResponsiveContainer  = ({children, ...props}:Readonly<ResponsiveContainerProps>) => process.env.NODE_ENV === 'test'
     ? <>{children}</>
     : <ResponsiveContainerO {...props}>{children}</ResponsiveContainerO>
 
-const XAxisLo  = ({...props}:AxisProp) => <XAxis></XAxis>
-const YAxisLo  = ({...props}:AxisProp) => <YAxis></YAxis>
 const useTypedSelector: TypedUseSelectorHook<StockState> = useSelector
 
 const Chart = () => {
@@ -121,25 +119,25 @@ const Chart = () => {
                             </linearGradient>
                         </defs>
 
-                        <XAxisLo
+                        <XAxis
                             dataKey="label"
                             stroke="transparent"
-                            style={{ fill: "#beccdc", fontSize: "13px" }}
+                            tick={{ fill: "#beccdc", fontSize: "13px" }}
                             // Following line avoids times like "9:17 AM" to be ticks
                             ticks={XTicks}
                             interval={"preserveStart"}
                         >
-                        </ XAxisLo>
+                        </ XAxis>
 
-                        <YAxisLo
+                        <YAxis
                             dataKey="close"
                             domain={[Number(YTicks[0]), Number(YTicks[YTicks.length - 1])]}
                             orientation="right"
                             stroke="transparent"
-                            style={{ fill: "#beccdc", fontSize: "13px" }}
+                            tick={{ fill: "#beccdc", fontSize: "13px" }}
                             ticks={YTicks}
                         >
-                        </ YAxisLo>
+                        </ YAxis>
 
                         <Area
                             isAnimationActive={false}
