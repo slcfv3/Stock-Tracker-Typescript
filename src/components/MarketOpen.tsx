@@ -14,7 +14,7 @@ const MarketOpen = () => {
         const month = months[today.getMonth()];
         const year = today.getFullYear();
         let hour = (today.getHours() + 24) % 12 || 12
-        let min :any = today.getMinutes();
+        let min : number | string = today.getMinutes();
         let ampm = today.getHours()>=12 ? 'PM' : 'AM'
 
         if(today.getHours()>16||today.getHours()<9||(today.getHours()===9&&min<30)){

@@ -14,11 +14,11 @@ const UpArrowIconLo = ({ ...props}:IconProp) => <UpArrowIcon {...props}/>
 const StyledPriceLo = ({children, ...props}:StyledPriceProp) => <StyledPrice {...props}>{children}</StyledPrice>
 const PriceChangeLo = ({children, ...props}:PriceChangeProp) => <PriceChange {...props}>{children}</PriceChange>
 const Price = (props: PriceProp) => {
-    const price = useTypedSelector(state => state.price);
-    const priceChange = useTypedSelector(state => state.priceChange)
-    const priceChangeDisplay = Math.abs(priceChange).toFixed(2)
-    const priceChangePercent = useTypedSelector(state => state.priceChangePercent)
-    const priceChangePercentDisplay = Math.abs(priceChangePercent).toFixed(2)
+    const price = useTypedSelector(state => state?state.price:0);
+    const priceChange = useTypedSelector(state => state?state.priceChange:0)
+    const priceChangeDisplay = priceChange?Math.abs(priceChange).toFixed(2): 0
+    const priceChangePercent = useTypedSelector(state => state?.priceChangePercent)
+    const priceChangePercentDisplay = priceChangePercent? Math.abs(priceChangePercent).toFixed(2) : 0
     let arrowIcon;
 
     if (priceChange < 0) {

@@ -8,16 +8,16 @@ import {StockState} from '../reducers/types'
 
 const useTypedSelector: TypedUseSelectorHook<StockState> = useSelector
 const News = () => {
-    const news = useTypedSelector(state => state.news);
+    const news = useTypedSelector(state => state?.news);
     return (
         <div className="news">
             <SectionTitle>LATEST NEWS</SectionTitle>
             <BlueLine />
             <NewsList data-testid='newslist'>
-                {news.map((article, index) =>
+                {news?.map((article, index) =>
                     <ListItem>
-                        <Headline data-testid={'headline'+index}>{article.headline}</ Headline>                    
-                        <ArticleLabel data-testid={'tag'+index}>{unixToTimePassed(article.datetime)} - {article.source}</ArticleLabel>
+                        <Headline data-testid={'headline'+index}>{article?.headline}</ Headline>                    
+                        <ArticleLabel data-testid={'tag'+index}>{unixToTimePassed(article?.datetime)} - {article?.source}</ArticleLabel>
                     </ListItem>
                 )}
 

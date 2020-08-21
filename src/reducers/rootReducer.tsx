@@ -1,5 +1,5 @@
 import {StockActionTypes} from './actions'
-import { StockState, KeyStats } from './types'
+import { StockState, KeyStats, rootReducerType } from './types'
 
 const initialStats : KeyStats = {
     previousClose: null,
@@ -21,20 +21,19 @@ const initialStats : KeyStats = {
 export const initialState : StockState = {
     symbol: "",
     companyName: "",
-    overview: "",
+    overview: undefined,
     price: 0,
     priceChange: 0,
     priceChangePercent: 0,
-    chart: [],
-    coldChart: null,
+    chart: undefined,
+    coldChart: undefined,
     news: [],
     keyStats: initialStats,
-    peer: [],
     possible:[],
     isLoading: false
 }
 
-export const rootReducer = (state = initialState, action:StockActionTypes) => {
+export const rootReducer: rootReducerType<StockState, StockActionTypes> = (state = initialState, action:StockActionTypes) => {
     switch (action.type) {
         case 'STOCK_RECEIVED':
             const stock = action.payload
@@ -65,7 +64,6 @@ export const rootReducer = (state = initialState, action:StockActionTypes) => {
                 coldChart: stock.coldcharts,
                 news: stock.news,
                 keyStats: keyStats,
-                peer: stock.peers,
                 isLoading: false
             }
         case 'SEARCH_SUBMITTED':

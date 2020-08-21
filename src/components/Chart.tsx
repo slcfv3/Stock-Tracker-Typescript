@@ -7,7 +7,7 @@ import { Row } from '../styled-components/wrappers';
 import { getPriceTicks, getTimeTicks } from '../util';
 import {StockState} from '../reducers/types'
 
-const ResponsiveContainer  = ({children, ...props}:Readonly<ResponsiveContainerProps>) => process.env.NODE_ENV === 'test'
+const ResponsiveContainer  = ({children, ...props}:ResponsiveContainerProps) => process.env.NODE_ENV === 'test'
     ? <>{children}</>
     : <ResponsiveContainerO {...props}>{children}</ResponsiveContainerO>
 
@@ -15,9 +15,9 @@ const useTypedSelector: TypedUseSelectorHook<StockState> = useSelector
 
 const Chart = () => {
     
-    const chartData = useTypedSelector(state => state.chart)
-    const coldchartData = useTypedSelector(state => state.coldChart)
-    const currentPrice = useTypedSelector(state => state.price)
+    const chartData = useTypedSelector(state => state?.chart)
+    const coldchartData = useTypedSelector(state => state?.coldChart)
+    const currentPrice = useTypedSelector(state => state?.price)
     const [active, setActive] = useState('1D');
     const [currentChart, setCurrentChart] = useState(chartData);
     const [lineDisplay, setLineDisplay] = useState('block')
@@ -26,14 +26,17 @@ const Chart = () => {
 
     useEffect(() => {
         if (active === '1D') {
-            setCurrentChart(chartData)
-            setYTicks(getPriceTicks(chartData, 10))
-            setXTicks(getTimeTicks(chartData, '1D'))
-            if (chartData[0] === undefined) {
-                setLineDisplay('none')
-            } else {
-                setLineDisplay('block')
+            if(chartData){
+                setCurrentChart(chartData)
+                setYTicks(getPriceTicks(chartData, 10))
+                setXTicks(getTimeTicks(chartData, '1D'))
+                if (chartData[0] === undefined) {
+                    setLineDisplay('none')
+                } else {
+                    setLineDisplay('block')
+                }
             }
+            
         }
         if (active === '5D') {
             setCurrentChart(coldchartData!.fiveday)

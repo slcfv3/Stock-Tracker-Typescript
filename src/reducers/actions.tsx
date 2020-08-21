@@ -4,10 +4,11 @@ export const NEWS_RECEIVED = 'NEWS_RECEIVED'
 export const PRICE_RECEIVED = 'PRICE_RECEIVED'
 export const POSSIBLE_RECEIVED = 'POSSIBLE_RECEIVED'
 export const STOCK_NOT_FOUND = 'STOCK_NOT_FOUND'
+import {StockDataType} from '../reducers/types'
 
 interface StockReceivedAction {
     type: typeof SEND_MESSAGE
-    payload: any
+    payload: StockDataType
   }
   
   interface SearchSubmittedAction {
@@ -37,4 +38,4 @@ interface StockReceivedAction {
     
   }
   
-  export type StockActionTypes = StockReceivedAction | SearchSubmittedAction | NewsReceivedAction | PriceReceivedAction | PossibleReceivedAction | StockNotFoundAction
+  export type StockActionTypes = StockReceivedAction | SearchSubmittedAction | NewsReceivedAction | PriceReceivedAction | PossibleReceivedAction | StockNotFoundAction 

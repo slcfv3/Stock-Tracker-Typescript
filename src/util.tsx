@@ -1,5 +1,7 @@
+import { Charts } from "./reducers/types"
 
-export function getTimeTicks(chartData :any[], active : string) {
+export function getTimeTicks(chartData :Charts[], active : string) {
+ 
   let ticks:string[] = []
   if(active === '1D'){
     
@@ -38,10 +40,10 @@ export function getTimeTicks(chartData :any[], active : string) {
   return ticks;
 }
 
-export function getPriceTicks(chartData : any[], nbOfTicks:number) : string[] {
+export function getPriceTicks(chartData : Charts[], nbOfTicks:number) : string[] {
     if(chartData[0]===undefined) return ['0']
-    const minPrice = chartData.reduce((min, dataPoint) => (dataPoint.close !== null && dataPoint.close < min) ? dataPoint.close : min, Number.MAX_SAFE_INTEGER);
-    const maxPrice = chartData.reduce((max, dataPoint) => dataPoint.close > max ? dataPoint.close : max, Number.MIN_SAFE_INTEGER);
+    const minPrice = chartData.reduce((min, dataPoint) => dataPoint.close !== null && dataPoint.close < min ? dataPoint.close : min, Number.MAX_SAFE_INTEGER);
+    const maxPrice = chartData.reduce((max, dataPoint) => dataPoint.close !== null && dataPoint.close > max ? dataPoint.close : max, Number.MIN_SAFE_INTEGER);
 
     const minRoundedToEven = 2 * Math.floor(minPrice/ 2); // first label
 
@@ -132,6 +134,7 @@ export function numberWithCommas(x:number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export function numberToPercent(x:number){
+export function numberToPercent(x:number| null){
+  if(x === null) return '  ';
   return (x*100).toFixed(2).toString()+'%'
 }

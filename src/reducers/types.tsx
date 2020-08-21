@@ -1,18 +1,36 @@
-export interface StockState{
+import { StockActionTypes } from "./actions"
+
+export type StockState = {
     symbol: string,
     companyName: string,
-    overview: any,
+    overview: Overview | undefined,
     price: number,
     priceChange: number,
     priceChangePercent: number,
-    chart: any[],
-    coldChart: ColdChart | null,
-    news: any[],
+    chart: Charts[]| undefined,
+    coldChart: ColdChart | undefined,
+    news: News[],
     keyStats: KeyStats,
-    peer: any[],
-    possible:any[],
+    possible:Possible[],
     isLoading: boolean
+} 
+
+export interface News{
+    headline:string,
+    datetime:number,
+    source: string
 }
+
+export interface Possible{
+    symbol:string,
+    securityName:string,
+    exchange: string
+}
+
+export type rootReducerType<S, A extends StockActionTypes> = (
+        state: S | undefined,
+        action: A
+    )=>S
 
 export interface Action{
     type:string,
@@ -83,13 +101,13 @@ export interface GridProp{
 
 export interface ColProp{
     children: React.ReactNode,
-    size?: number | null,
-    hideWidth?: string | null,
-    fontSize?: string | null,
-    margin?: string | null,
-    Padding?: string | null,
-    BorderRight?: string | null,
-    BorderColor?: string | null,
+    size?: number,
+    hideWidth?: string,
+    fontSize?: string,
+    margin?: string,
+    Padding?: string,
+    BorderRight?: string,
+    BorderColor?: string,
 }
 
 export interface PeerSymbolProp{
@@ -145,25 +163,9 @@ export interface PeerProp{
 export interface DropdownProp{
     children?: React.ReactNode,
     smallBreakpoint?: string,
-    breakpoint: string,
-    lgbreakpoint: string,
-    xlgbreakpoint: string
-}
-
-export interface AxisProp{
-    dataKey:string,
-    style: AxisStyle,
-    stroke:string,
-    ticks:string[] | undefined,
-    interval?:string,
-    children: never[],
-    orientation?:string,
-    domain?:number[]
-}
-
-type AxisStyle={
-    fontSize: string,
-    fill: string
+    breakpoint?: string,
+    lgbreakpoint?: string,
+    xlgbreakpoint?: string
 }
 
 export interface AbortSignal{
@@ -173,5 +175,36 @@ export interface AbortSignal{
 export type SearchActionType = {
     type: 'SEARCH_SUBMITTED' | 'SEARCH_ENTERED',
     payload: string
+}
+
+export interface StockDataType{
+    previousClose: number,
+    iexVolume: number,
+    marketCap: number,
+    peRatio: number,
+    week52Low: number,
+    week52High: number,
+    avgTotalVolume: number,
+    stats:KeyStats,
+    low: number,
+    high: number,
+    open: number,
+    symbol: string,
+    companyName: string,
+    overview: Overview,
+    latestPrice: number,
+    change: number,
+    changePercent: number,
+    chart: Charts[],
+    coldcharts: ColdChart,
+    news:[]
+    
+}
+
+interface Overview{
+    symbol:string
+    companyName: string,
+    website:string,
+    description: string
 }
 

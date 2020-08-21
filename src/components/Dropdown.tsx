@@ -13,7 +13,7 @@ const DropDown = (props: DropdownProp) => {
   
   const dispatch = useDispatch();
   
-  const possible = useTypedSelector(state => state.possible)
+  const possible = useTypedSelector(state => state?.possible)
   
   
   const onClick = (symbol:string) =>{
@@ -24,15 +24,15 @@ const DropDown = (props: DropdownProp) => {
     dispatch({ type: 'POSSIBLE_RECEIVED', payload: [] })
   }
 
-  if(possible.length) {
+  if(possible&&possible.length) {
     return(
         <DropdownBodyLo xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}>
             <OptionListLo xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint}>
                 {possible.map((optionName, index) => {
                 
                 return (
-                    <Option key={optionName.symbol} onMouseDown={()=>onClick(optionName.symbol)} onBlur={() => onBlurHandler}>
-                    <SymbolTag>{optionName.symbol}</SymbolTag> <TagContainer><NameTagLo breakpoint={props.smallBreakpoint}>{optionName.securityName}</NameTagLo> <ExchangeText breakpoint={props.breakpoint}>{optionName.exchange}</ExchangeText><ExchangeTag breakpoint={props.breakpoint}></ExchangeTag></TagContainer>
+                    <Option key={optionName?.symbol} onMouseDown={()=>onClick(optionName?.symbol)} onBlur={() => onBlurHandler}>
+                    <SymbolTag>{optionName?.symbol}</SymbolTag> <TagContainer><NameTagLo breakpoint={props.smallBreakpoint}>{optionName?.securityName}</NameTagLo> <ExchangeText breakpoint={props.breakpoint}>{optionName?.exchange}</ExchangeText><ExchangeTag breakpoint={props.breakpoint}></ExchangeTag></TagContainer>
                     </Option>
                 );
 

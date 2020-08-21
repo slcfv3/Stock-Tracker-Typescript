@@ -8,12 +8,12 @@ const useTypedSelector: TypedUseSelectorHook<StockState> = useSelector
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const name = useTypedSelector(state => state.companyName);
-  const symbol = useTypedSelector(state => state.symbol);
+  const name = useTypedSelector(state => state?.companyName);
+  const symbol = useTypedSelector(state => state?.symbol);
 
   let placeholder = symbol === "" ? "Please enter a stock symbol" : name + '  (' + symbol + ')'
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     dispatch({ type: 'POSSIBLE_RECEIVED', payload: [] })
     e.preventDefault();
     if (search.toUpperCase() !== symbol && search !== "") {
