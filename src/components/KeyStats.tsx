@@ -72,7 +72,7 @@ const Keystats = () => {
                             </tr>
                             <tr>
                                 <StatLabel> Dividend & Yield </StatLabel>
-                                <StatValue data-testid="dividend"> {stats?.dividendYield?numberToPercent(stats?.dividendYield):stats?.dividendYield} </ StatValue>
+                                <StatValue data-testid="dividend"> {stats?.dividendYield?numberToPercent(stats?.dividendYield):null} </ StatValue>
                             </tr>
                         </tbody>
                     </StatTable>

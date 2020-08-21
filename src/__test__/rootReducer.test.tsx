@@ -26,7 +26,7 @@ export const initialState : StockState = {
     price: 0,
     priceChange: 0,
     priceChangePercent: 0,
-    chart: [],
+    chart: undefined,
     coldChart: undefined,
     news: [],
     keyStats: initialStats,

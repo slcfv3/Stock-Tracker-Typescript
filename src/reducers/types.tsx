@@ -10,7 +10,7 @@ export type StockState = {
     chart: Charts[]| undefined,
     coldChart: ColdChart | undefined,
     news: News[],
-    keyStats: KeyStats,
+    keyStats: KeyStats | undefined,
     possible:Possible[],
     isLoading: boolean
 } 
@@ -64,7 +64,7 @@ export interface ColdChart {
 }
 
 export interface Charts{ 
-    date: number, 
+    date: string, 
     minute: string, 
     label: any, 
     high:number| null , 
@@ -185,10 +185,10 @@ export interface StockDataType{
     week52Low: number,
     week52High: number,
     avgTotalVolume: number,
-    stats:KeyStats,
-    low: number,
-    high: number,
-    open: number,
+    stats:StatsData,
+    low: number | null,
+    high: number | null,
+    open: number | null,
     symbol: string,
     companyName: string,
     overview: Overview,
@@ -197,8 +197,53 @@ export interface StockDataType{
     changePercent: number,
     chart: Charts[],
     coldcharts: ColdChart,
-    news:[]
+    news:NewsData[]
     
+}
+
+interface NewsData {
+    datetime: number,
+    headline: string,
+    source: string,
+    url: string,
+    summary: string,
+    related: string,
+    image: string,
+    lang: string,
+    hasPaywall: boolean
+}
+
+interface StatsData{
+    week52change:number | null,
+    week52high: number ,
+    week52low: number ,
+    marketcap: number | null,
+    employees: number | null,
+    day200MovingAvg: number | null,
+    day50MovingAvg: number | null,
+    float: number | null,
+    avg10Volume: number | null,
+    avg30Volume: number | null,
+    ttmEPS: number | null,
+    ttmDividendRate: number | null,
+    companyName: string,
+    sharesOutstanding: number | null,
+    maxChangePercent: number | null,
+    year5ChangePercent: number | null,
+    year2ChangePercent: number | null,
+    year1ChangePercent: number | null,
+    ytdChangePercent: number | null,
+    month6ChangePercent: number | null,
+    month3ChangePercent: number | null,
+    month1ChangePercent: number | null,
+    day30ChangePercent: number | null,
+    day5ChangePercent: number | null,
+    nextDividendDate: string | null,
+    dividendYield: number | null,
+    nextEarningsDate: string,
+    exDividendDate: number | null,
+    peRatio: number | null,
+    beta: number | null,
 }
 
 interface Overview{

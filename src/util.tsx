@@ -135,6 +135,6 @@ export function numberWithCommas(x:number) {
 }
 
 export function numberToPercent(x:number| null){
-  if(x === null) return '  ';
+  if(x === null) return '';
   return (x*100).toFixed(2).toString()+'%'
 }

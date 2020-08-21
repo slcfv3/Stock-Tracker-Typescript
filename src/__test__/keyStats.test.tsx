@@ -18,8 +18,8 @@ const initialState = {
     price: 0,
     priceChange: 0,
     priceChangePercent: 0,
-    chart: [],
-    coldChart: {},
+    chart: undefined,
+    coldChart: undefined,
     news: [],
     keyStats: {},
     peer: []
