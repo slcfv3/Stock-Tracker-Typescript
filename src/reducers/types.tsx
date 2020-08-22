@@ -32,14 +32,10 @@ export type rootReducerType<S, A extends StockActionTypes> = (
         action: A
     )=>S
 
-export interface Action{
-    type:string,
-    payload: any
-}
 
 export interface KeyStats {
     previousClose: number | null,
-    iexVolume: number | null,
+    volume: number | null,
     marketCap: number | null,
     peRatio: number | null,
     week52Low: number | null,
@@ -54,19 +50,73 @@ export interface KeyStats {
 }
 
 export interface ColdChart {
-    oneday: any[],
-    fiveday: any[],
-    onemonth: any[],
-    oneyear: any[],
-    fiveyear: any[],
-    max:any[]
+    oneday: Oneday[],
+    fiveday: Fiveday[],
+    onemonth: Fiveday[],
+    oneyear: Fiveday[],
+    fiveyear: Fiveyear[],
+    max:Fiveyear[]
 
 }
+
+export interface Oneday{
+    date: string,
+    minute: string,
+    label: string,
+    high: number | null,
+    low: number | null,
+    open: number | null,
+    close: number | null,
+    average: number | null,
+    volume: number,
+    notional: number,
+    numberOfTrades: number
+}
+
+export interface Fiveday{
+    date: string,
+    label: string,
+    high: number | null,
+    low: number | null,
+    open: number | null,
+    close: number | null,
+    uOpen: number,
+    uClose: number,
+    uHigh: number,
+    uLow: number,
+    uVolume: number,
+    volume: number,
+    change: number,
+    changePercent: number,
+    changeOverTime: number
+}
+
+
+export interface Fiveyear{
+    date: string,
+    label: string,
+    high: number | null,
+    low: number | null,
+    open: number | null,
+    close: number | null,
+    uOpen: number,
+    uClose: number,
+    uHigh: number,
+    uLow: number,
+    uVolume: number,
+    volume: number,
+    change: number,
+    changePercent: number,
+    changeOverTime: number,
+    currency:string
+}
+
+
 
 export interface Charts{ 
     date: string, 
     minute: string, 
-    label: any, 
+    label: string, 
     high:number| null , 
     low:number| null , 
     open:number| null , 
@@ -168,8 +218,8 @@ export interface DropdownProp{
     xlgbreakpoint?: string
 }
 
-export interface AbortSignal{
-    signal:any
+export interface AbortSignalLo{
+    signal:AbortSignal
 }
 
 export type SearchActionType = {
@@ -179,7 +229,7 @@ export type SearchActionType = {
 
 export interface StockDataType{
     previousClose: number,
-    iexVolume: number,
+    volume: number | null,
     marketCap: number,
     peRatio: number,
     week52Low: number,

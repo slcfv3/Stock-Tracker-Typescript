@@ -3,7 +3,7 @@ import { StockState, KeyStats, rootReducerType } from './types'
 
 const initialStats : KeyStats = {
     previousClose: null,
-    iexVolume: null,
+    volume: null,
     marketCap: null,
     peRatio: null,
     week52Low: null,
@@ -39,7 +39,7 @@ export const rootReducer: rootReducerType<StockState, StockActionTypes> = (state
             const stock = action.payload
             const keyStats : KeyStats = {
                 previousClose: stock.previousClose,
-                iexVolume: stock.iexVolume,
+                volume: stock.volume,
                 marketCap: stock.marketCap,
                 peRatio: stock.peRatio,
                 week52Low: stock.week52Low,

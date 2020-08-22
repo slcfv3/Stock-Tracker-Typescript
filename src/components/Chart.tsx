@@ -5,7 +5,7 @@ import { Area, AreaChart, CartesianGrid, Label, ReferenceLine, ResponsiveContain
 import { ChartButton } from '../styled-components/buttons';
 import { Row } from '../styled-components/wrappers';
 import { getPriceTicks, getTimeTicks } from '../util';
-import {StockState} from '../reducers/types'
+import { StockState, Charts, Oneday, Fiveday, Fiveyear } from '../reducers/types'
 
 const ResponsiveContainer  = ({children, ...props}:ResponsiveContainerProps) => process.env.NODE_ENV === 'test'
     ? <>{children}</>
@@ -19,7 +19,7 @@ const Chart = () => {
     const coldchartData = useTypedSelector(state => state?.coldChart)
     const currentPrice = useTypedSelector(state => state?.price)
     const [active, setActive] = useState('1D');
-    const [currentChart, setCurrentChart] = useState(chartData);
+    const [currentChart, setCurrentChart] = useState<Charts[]|Oneday[]|Fiveday[]|Fiveyear[]| undefined>(chartData);
     const [lineDisplay, setLineDisplay] = useState('block')
     const [XTicks, setXTicks] = useState<string[] | undefined>();
     const [YTicks, setYTicks] = useState(['0']);

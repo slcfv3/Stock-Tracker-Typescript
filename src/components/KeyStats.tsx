@@ -38,7 +38,7 @@ const Keystats = () => {
                         </tr>
                         <tr>
                             <StatLabel> Volume </StatLabel>
-                            <StatValue data-testid="volume"> {stats?.iexVolume?numberWithCommas(stats?.iexVolume):stats?.iexVolume} </ StatValue>
+                            <StatValue data-testid="volume"> {stats?.volume?numberWithCommas(stats?.volume):stats?.volume} </ StatValue>
                         </tr>
                         <tr>
                             <StatLabel> Market Cap </StatLabel>

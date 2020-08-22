@@ -1,8 +1,8 @@
 import { select, put, call, takeLatest, cancelled, delay, all } from 'redux-saga/effects'
 import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL, POSSIBLE_SYMBOL_URL } from '../config/config'
-import {AbortSignal, SearchActionType} from '../reducers/types'
+import { AbortSignalLo, SearchActionType} from '../reducers/types'
 
-export const getNewStockData = (url:string, controller: AbortSignal) => fetch(url, { signal: controller.signal })
+export const getNewStockData = (url:string, controller: AbortSignalLo) => fetch(url, { signal: controller.signal })
     .then(response => {
         if(response.status===404){
             console.debug('Stock symbol does not exist!')

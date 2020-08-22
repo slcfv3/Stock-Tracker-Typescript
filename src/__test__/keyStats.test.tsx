@@ -6,6 +6,7 @@ import configureStore from 'redux-mock-store';
 import Keystats from '../components/KeyStats';
 import { findHighValue, findLowValue, numberToPercent, numberWithCommas } from '../util';
 import sampleData from './mocks/sampleData';
+import { KeyStats} from '../reducers/types'
 
 const mockStore = configureStore([]);
 
@@ -21,13 +22,12 @@ const initialState = {
     chart: undefined,
     coldChart: undefined,
     news: [],
-    keyStats: {},
-    peer: []
+    keyStats: undefined,
 }
 
 const keyStats = {
     previousClose: sampleData.previousClose,
-    iexVolume: sampleData.iexVolume,
+    volume: sampleData.volume,
     marketCap: sampleData.marketCap,
     peRatio: sampleData.peRatio,
     week52Low: sampleData.week52Low,
@@ -108,7 +108,7 @@ describe('Keystats Component', () => {
     it('should render correct value for volume', () => {
         component(store)
         const volume = screen.getByText('Volume').closest('tr')?.children[1]
-        expect(volume?.innerHTML).toBe(' '+numberWithCommas(newState.keyStats.iexVolume)+' ');
+        expect(volume?.innerHTML).toBe(' '+numberWithCommas(newState.keyStats.volume)+' ');
     });
 
     it('should render correct value for market cap', () => {

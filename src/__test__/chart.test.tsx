@@ -24,7 +24,7 @@ const initialState = {
 }
 const keyStats = {
     previousClose: stock.previousClose,
-    iexVolume: stock.iexVolume,
+    volume: stock.volume,
     marketCap: stock.marketCap,
     peRatio: stock.peRatio,
     week52Low: stock.week52Low,

@@ -1,6 +1,6 @@
-import { Charts } from "./reducers/types"
+import { Charts, Oneday, Fiveday, Fiveyear } from "./reducers/types"
 
-export function getTimeTicks(chartData :Charts[], active : string) {
+export function getTimeTicks(chartData :Charts[]|Oneday[]|Fiveday[]|Fiveyear[], active : string) {
  
   let ticks:string[] = []
   if(active === '1D'){
@@ -17,7 +17,7 @@ export function getTimeTicks(chartData :Charts[], active : string) {
       }  
   }
   if(active === '5D'){
-    chartData.forEach(item => ticks.push(item.label))
+    chartData.forEach((item: any) => ticks.push(item.label))
   }
   if(active === '1M'){
     ticks=[chartData[0].label,chartData[6].label,chartData[12].label,chartData[18].label]
@@ -40,22 +40,29 @@ export function getTimeTicks(chartData :Charts[], active : string) {
   return ticks;
 }
 
-export function getPriceTicks(chartData : Charts[], nbOfTicks:number) : string[] {
+export function getPriceTicks(chartData : Charts[] | Oneday[]|Fiveday[]|Fiveyear[], nbOfTicks:number) : string[] {
     if(chartData[0]===undefined) return ['0']
-    const minPrice = chartData.reduce((min, dataPoint) => dataPoint.close !== null && dataPoint.close < min ? dataPoint.close : min, Number.MAX_SAFE_INTEGER);
-    const maxPrice = chartData.reduce((max, dataPoint) => dataPoint.close !== null && dataPoint.close > max ? dataPoint.close : max, Number.MIN_SAFE_INTEGER);
-
+    let minPrice =Number.MAX_SAFE_INTEGER //chartData.reduce((min : number, dataPoint : Charts) => dataPoint.close !== null && dataPoint.close < min ? dataPoint.close : min, Number.MAX_SAFE_INTEGER);
+    let maxPrice = 0 // chartData.reduce((max : number, dataPoint : Charts) => dataPoint.close !== null && dataPoint.close > max ? dataPoint.close : max, Number.MIN_SAFE_INTEGER);
+    chartData.forEach((point : Charts | Oneday | Fiveday | Fiveyear)=>{
+      if(point.close !== null) {
+        if( point.close>maxPrice)
+          maxPrice = point.close
+        if(point.close<minPrice)
+          minPrice = point.close
+      }
+    })
     const minRoundedToEven = 2 * Math.floor(minPrice/ 2); // first label
 
     const spread = maxPrice - minRoundedToEven;
     const step = spread / (nbOfTicks - 1);
 
-    let stepRounded:any;
+    let stepRounded:number;
     if (0.5 < step && step <= 1) {
         stepRounded = 1;
     }
     if (step <= 0.5) {
-        stepRounded = (Math.ceil(step * 20) / 20).toFixed(2); // round to upper  0.05
+        stepRounded = Number((Math.ceil(step * 20) / 20).toFixed(2)); // round to upper  0.05
     }
     else {
         stepRounded = 2 * Math.ceil(step / 2); // round to upper even number
@@ -130,11 +137,12 @@ export function findLowValue(chart:any[]){
    return min;
 }
 
-export function numberWithCommas(x:number) {
+export function numberWithCommas(x:number | null) {
+  if(x===null) return ''
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 export function numberToPercent(x:number| null){
-  if(x === null) return '';
+  if(x === null) return ''
   return (x*100).toFixed(2).toString()+'%'
 }
